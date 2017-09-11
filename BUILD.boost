@@ -67,12 +67,17 @@ boost_library(
         ":is_placeholder",
         ":mem_fn",
         ":ref",
+        ":type",
         ":visit_each",
     ],
 )
 
 boost_library(
     name = "call_traits",
+)
+
+boost_library(
+    name = "cast",
 )
 
 boost_library(
@@ -116,11 +121,27 @@ boost_library(
 )
 
 boost_library(
+    name = "concept_archetype",
+    deps = [
+        ":config",
+        ":iterator",
+        ":mpl",
+    ],
+)
+
+boost_library(
     name = "concept_check",
+    deps = [
+        ":concept",
+        ":concept_archetype",
+    ],
 )
 
 boost_library(
     name = "config",
+    hdrs = [
+        "boost/cstdint.hpp",
+    ],
     deps = [
         ":version",
     ],
@@ -168,10 +189,14 @@ boost_library(
 boost_library(
     name = "date_time",
     deps = [
+        ":algorithm",
+        ":io",
+        ":lexical_cast",
         ":mpl",
         ":operators",
         ":smart_ptr",
         ":static_assert",
+        ":tokenizer",
         ":type_traits",
     ],
 )
@@ -189,8 +214,12 @@ boost_library(
 
 boost_library(
     name = "exception",
+    hdrs = [
+        "boost/exception_ptr.hpp",
+    ],
     deps = [
         ":config",
+        ":detail",
     ],
 )
 
@@ -210,6 +239,21 @@ boost_library(
 
 boost_library(
     name = "foreach",
+)
+
+boost_library(
+    name = "format",
+    deps = [
+        ":assert",
+        ":config",
+        ":detail",
+        ":limits",
+        ":optional",
+        ":shared_ptr",
+        ":throw_exception",
+        ":timer",
+        ":utility",
+    ],
 )
 
 boost_library(
@@ -262,7 +306,32 @@ boost_library(
 )
 
 boost_library(
+    name = "interprocess",
+    deps = [
+        ":assert",
+        ":checked_delete",
+        ":config",
+        ":container",
+        ":core",
+        ":date_time",
+        ":detail",
+        ":integer",
+        ":intrusive",
+        ":limits",
+        ":move",
+        ":static_assert",
+        ":type_traits",
+        ":unordered",
+        ":utility",
+    ],
+)
+
+boost_library(
     name = "iterator",
+    hdrs = [
+        "boost/function_output_iterator.hpp",
+        "boost/pointee.hpp",
+    ],
     deps = [
         ":detail",
         ":static_assert",
@@ -290,6 +359,35 @@ boost_library(
 
 boost_library(
     name = "io",
+)
+
+boost_library(
+    name = "iostreams",
+    deps = [
+        ":assert",
+        ":bind",
+        ":call_traits",
+        ":checked_delete",
+        ":config",
+        ":cstdint",
+        ":detail",
+        ":function",
+        ":integer",
+        ":mpl",
+        ":noncopyable",
+        ":preprocessor",
+        ":random",
+        ":range",
+        ":ref",
+        ":regex",
+        ":shared_ptr",
+        ":static_assert",
+        ":throw_exception",
+        ":type",
+        ":type_traits",
+        ":utility",
+        "@org_bzip_bzip2//:bz2lib",
+    ],
 )
 
 boost_library(
@@ -347,6 +445,10 @@ boost_library(
 
 boost_library(
     name = "multi_index",
+    hdrs = [
+        "boost/multi_index_container.hpp",
+        "boost/multi_index_container_fwd.hpp",
+    ],
     deps = [
         ":foreach",
         ":serialization",
@@ -363,6 +465,37 @@ boost_library(
     name = "none",
     hdrs = [
         "boost/none_t.hpp",
+    ],
+)
+
+boost_library(
+    name = "numeric",
+    deps = [
+        ":array",
+        ":assert",
+        ":bind",
+        ":concept_check",
+        ":config",
+        ":core",
+        ":cstdint",
+        ":detail",
+        ":function",
+        ":iterator",
+        ":limits",
+        ":math",
+        ":mpl",
+        ":noncopyable",
+        ":preprocessor",
+        ":range",
+        ":ref",
+        ":serialization",
+        ":shared_array",
+        ":static_assert",
+        ":throw_exception",
+        ":timer",
+        ":type",
+        ":type_traits",
+        ":utility",
     ],
 )
 
@@ -391,10 +524,57 @@ boost_library(
 )
 
 boost_library(
+    name = "random",
+    deps = [
+        ":assert",
+        ":config",
+        ":cstdint",
+        ":detail",
+        ":foreach",
+        ":integer",
+        ":lexical_cast",
+        ":limits",
+        ":math",
+        ":mpl",
+        ":multi_index",
+        ":noncopyable",
+        ":operators",
+        ":range",
+        ":regex",
+        ":shared_ptr",
+        ":static_assert",
+        ":system",
+        ":test",
+        ":throw_exception",
+        ":timer",
+        ":tuple",
+        ":type_traits",
+        ":utility",
+    ],
+)
+
+boost_library(
     name = "range",
     deps = [
+        ":array",
+        ":assert",
+        ":cast",
         ":concept_check",
+        ":config",
+        ":cstdint",
+        ":detail",
+        ":functional",
+        ":iterator",
+        ":mpl",
+        ":noncopyable",
         ":optional",
+        ":preprocessor",
+        ":ref",
+        ":regex",
+        ":static_assert",
+        ":tuple",
+        ":type_traits",
+        ":utility",
     ],
 )
 
@@ -439,6 +619,20 @@ boost_library(
 )
 
 boost_library(
+    name = "scope_exit",
+    deps = [
+        ":config",
+        ":detail",
+        ":function",
+        ":mpl",
+        ":preprocessor",
+        ":type_traits",
+        ":typeof",
+        ":utility",
+    ],
+)
+
+boost_library(
     name = "scoped_array",
     deps = [
         ":checked_delete",
@@ -467,6 +661,38 @@ boost_library(
 )
 
 boost_library(
+    name = "signals2",
+    deps = [
+        ":assert",
+        ":bind",
+        ":checked_delete",
+        ":config",
+        ":core",
+        ":detail",
+        ":function",
+        ":iterator",
+        ":mpl",
+        ":multi_index",
+        ":noncopyable",
+        ":optional",
+        ":parameter",
+        ":predef",
+        ":preprocessor",
+        ":ref",
+        ":scoped_ptr",
+        ":shared_ptr",
+        ":smart_ptr",
+        ":swap",
+        ":throw_exception",
+        ":tuple",
+        ":type_traits",
+        ":utility",
+        ":variant",
+        ":visit_each",
+    ],
+)
+
+boost_library(
     name = "serialization",
     deps = [
         ":archive",
@@ -474,6 +700,7 @@ boost_library(
         ":call_traits",
         ":config",
         ":detail",
+        ":function",
         ":operators",
         ":type_traits",
     ],
@@ -482,7 +709,10 @@ boost_library(
 boost_library(
     name = "smart_ptr",
     hdrs = [
+        "boost/enable_shared_from_this.hpp",
         "boost/make_shared.hpp",
+        "boost/pointer_to_other.hpp",
+        "boost/weak_ptr.hpp",
     ],
     deps = [
         ":align",
@@ -502,6 +732,7 @@ boost_library(
     deps = [
         ":optional",
         ":ref",
+        ":utility",
     ],
 )
 
@@ -531,6 +762,7 @@ boost_library(
     name = "throw_exception",
     deps = [
         ":current_function",
+        ":detail",
         ":exception",
     ],
 )
@@ -563,6 +795,22 @@ boost_library(
 )
 
 boost_library(
+    name = "tokenizer",
+    hdrs = [
+        "boost/token_functions.hpp",
+        "boost/token_iterator.hpp",
+    ],
+    deps = [
+        ":assert",
+        ":config",
+        ":detail",
+        ":iterator",
+        ":mpl",
+        ":throw_exception",
+    ],
+)
+
+boost_library(
     name = "type",
     deps = [
         ":core",
@@ -590,6 +838,18 @@ boost_library(
 )
 
 boost_library(
+    name = "typeof",
+    deps = [
+        ":config",
+        ":detail",
+        ":mpl",
+        ":preprocessor",
+        ":type_traits",
+        ":utility",
+    ],
+)
+
+boost_library(
     name = "tuple",
 )
 
@@ -604,11 +864,39 @@ boost_library(
 )
 
 boost_library(
+    name = "unordered",
+    hdrs = [
+        "boost/unordered_map.hpp",
+        "boost/unordered_set.hpp",
+    ],
+    deps = [
+        ":assert",
+        ":config",
+        ":container",
+        ":detail",
+        ":functional",
+        ":iterator",
+        ":limits",
+        ":move",
+        ":preprocessor",
+        ":smart_ptr",
+        ":swap",
+        ":throw_exception",
+        ":tuple",
+        ":type_traits",
+        ":utility",
+    ],
+)
+
+boost_library(
     name = "utility",
     hdrs = [
+        "boost/compressed_pair.hpp",
         "boost/next_prior.hpp",
     ],
     deps = [
+        ":config",
+        ":detail",
         ":swap",
     ],
 )
@@ -648,17 +936,15 @@ boost_library(
 boost_library(
     name = "timer",
     deps = [
+        ":cerrno",
         ":chrono",
         ":config",
         ":cstdint",
         ":io",
         ":limits",
         ":system",
+        ":throw_exception",
     ],
-)
-
-boost_library(
-    name = "numeric",
 )
 
 boost_library(
