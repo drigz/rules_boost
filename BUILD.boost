@@ -123,6 +123,10 @@ boost_library(
         "libs/context/src/untested.cpp",
         "libs/context/src/continuation.cpp",
     ],
+    copts = select({
+        ":windows_x86_64": ["/DBOOST_CONTEXT_EXPORT="],
+        "//conditions:default": [],
+    }),
     visibility = ["//visibility:public"],
     deps = [
         ":assert",
